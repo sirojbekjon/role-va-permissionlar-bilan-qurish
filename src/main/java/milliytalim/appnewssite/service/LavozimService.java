@@ -29,4 +29,14 @@ public class LavozimService {
 
     }
 
+    public ApiResponse editLavozim(Long id, LavozimDto lavozimDto) {
+
+        Optional<Lavozim> optionalLavozim = lavozimRepository.findById(id);
+        Lavozim lavozim = optionalLavozim.get();
+        lavozim.setName(lavozimDto.getName());
+        lavozim.setDescription(lavozimDto.getDescription());
+        lavozim.setHuquqList(lavozimDto.getHuquqList());
+        lavozimRepository.save(lavozim);
+        return new ApiResponse("edited",true);
+    }
 }
